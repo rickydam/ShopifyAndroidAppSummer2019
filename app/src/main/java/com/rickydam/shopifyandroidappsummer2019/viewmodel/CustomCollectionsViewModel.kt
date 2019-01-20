@@ -1,7 +1,10 @@
 package com.rickydam.shopifyandroidappsummer2019.viewmodel
 
-import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModel
+import com.rickydam.shopifyandroidappsummer2019.data.remote.ShopifyAPI
+import javax.inject.Inject
 
-class CustomCollectionsViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class CustomCollectionsViewModel : BaseViewModel() {
+    @Inject
+    lateinit var shopifyAPI: ShopifyAPI
 }
