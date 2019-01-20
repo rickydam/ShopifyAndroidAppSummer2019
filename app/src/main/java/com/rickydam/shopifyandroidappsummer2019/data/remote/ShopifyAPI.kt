@@ -7,7 +7,7 @@ import retrofit2.http.GET
 /**
  * The interface that provides Retrofit HTTP requests
  */
-interface ShopifyAPIService {
+interface ShopifyAPI {
     /**
      * Get the list of CustomCollections from the Shopify API
      */
