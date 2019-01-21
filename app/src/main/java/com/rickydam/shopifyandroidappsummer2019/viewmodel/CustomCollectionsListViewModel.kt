@@ -4,6 +4,8 @@ import android.arch.lifecycle.MutableLiveData
 import android.view.View
 import com.rickydam.shopifyandroidappsummer2019.R
 import com.rickydam.shopifyandroidappsummer2019.data.remote.ShopifyAPI
+import com.rickydam.shopifyandroidappsummer2019.model.CustomCollection
+import com.rickydam.shopifyandroidappsummer2019.view.adapter.CollectionListAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -20,6 +22,8 @@ class CustomCollectionsListViewModel : BaseViewModel() {
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadCustomCollections() }
 
+    val collectionListAdapter: CollectionListAdapter = CollectionListAdapter()
+
     init {
         loadCustomCollections()
     }
@@ -31,7 +35,7 @@ class CustomCollectionsListViewModel : BaseViewModel() {
             .doOnSubscribe { onRetrieveCustomCollectionsStart() }
             .doOnTerminate { onRetrieveCustomCollectionsFinish() }
             .subscribe(
-                { onRetrieveCustomCollectionsSuccess() },
+                { result -> onRetrieveCustomCollectionsSuccess(result) },
                 { onRetrieveCustomCollectionsError() }
             )
     }
@@ -45,7 +49,9 @@ class CustomCollectionsListViewModel : BaseViewModel() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrieveCustomCollectionsSuccess() {}
+    private fun onRetrieveCustomCollectionsSuccess(customCollection: CustomCollection) {
+        collectionListAdapter.updateCollectionList(customCollection.collections)
+    }
 
     private fun onRetrieveCustomCollectionsError() {
         errorMessage.value = R.string.custom_collections_error
