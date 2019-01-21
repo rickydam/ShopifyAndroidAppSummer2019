@@ -1,5 +1,7 @@
 package com.rickydam.shopifyandroidappsummer2019.viewmodel
 
+import android.arch.lifecycle.MutableLiveData
+import android.view.View
 import com.rickydam.shopifyandroidappsummer2019.data.remote.ShopifyAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -11,6 +13,8 @@ class CustomCollectionsViewModel : BaseViewModel() {
     lateinit var shopifyAPI: ShopifyAPI
 
     private lateinit var subscription: Disposable
+
+    val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
     init {
         loadCustomCollections()
@@ -28,9 +32,13 @@ class CustomCollectionsViewModel : BaseViewModel() {
             )
     }
 
-    private fun onRetrieveCustomCollectionsStart() {}
+    private fun onRetrieveCustomCollectionsStart() {
+        loadingVisibility.value = View.VISIBLE
+    }
 
-    private fun onRetrieveCustomCollectionsFinish() {}
+    private fun onRetrieveCustomCollectionsFinish() {
+        loadingVisibility.value = View.GONE
+    }
 
     private fun onRetrieveCustomCollectionsSuccess() {}
 
