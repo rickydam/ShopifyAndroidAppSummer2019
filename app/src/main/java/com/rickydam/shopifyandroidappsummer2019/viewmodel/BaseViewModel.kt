@@ -20,7 +20,7 @@ abstract class BaseViewModel: ViewModel() {
      */
     private fun inject() {
         when (this) {
-            is CustomCollectionsViewModel -> injector.inject(this)
+            is CustomCollectionsListViewModel -> injector.inject(this)
         }
     }
 }

@@ -10,11 +10,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.rickydam.shopifyandroidappsummer2019.R
 import com.rickydam.shopifyandroidappsummer2019.databinding.ActivityCustomCollectionsBinding
-import com.rickydam.shopifyandroidappsummer2019.viewmodel.CustomCollectionsViewModel
+import com.rickydam.shopifyandroidappsummer2019.viewmodel.CustomCollectionsListViewModel
 
 class CustomCollectionsActivity: AppCompatActivity() {
     private lateinit var binding: ActivityCustomCollectionsBinding
-    private lateinit var viewModel: CustomCollectionsViewModel
+    private lateinit var listViewModel: CustomCollectionsListViewModel
     private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +24,16 @@ class CustomCollectionsActivity: AppCompatActivity() {
         binding.customCollectionsRecyclerview.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL, false)
 
-        viewModel = ViewModelProviders.of(this).get(CustomCollectionsViewModel::class.java)
-        viewModel.errorMessage.observe(this, Observer {
+        listViewModel = ViewModelProviders.of(this).get(CustomCollectionsListViewModel::class.java)
+        listViewModel.errorMessage.observe(this, Observer {
             errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
         })
-        binding.customCollectionsViewModel = viewModel
+        binding.customCollectionsListViewModel = listViewModel
     }
 
     private fun showError(@StringRes errorMessage: Int) {
         errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
+        errorSnackbar?.setAction(R.string.retry, listViewModel.errorClickListener)
         errorSnackbar?.show()
     }
 

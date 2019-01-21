@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CustomCollectionsViewModel : BaseViewModel() {
+class CustomCollectionsListViewModel : BaseViewModel() {
     @Inject
     lateinit var shopifyAPI: ShopifyAPI
 

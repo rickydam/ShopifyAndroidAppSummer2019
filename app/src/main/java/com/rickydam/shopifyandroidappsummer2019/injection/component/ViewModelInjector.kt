@@ -1,7 +1,7 @@
 package com.rickydam.shopifyandroidappsummer2019.injection.component
 
 import com.rickydam.shopifyandroidappsummer2019.injection.module.NetworkModule
-import com.rickydam.shopifyandroidappsummer2019.viewmodel.CustomCollectionsViewModel
+import com.rickydam.shopifyandroidappsummer2019.viewmodel.CustomCollectionsListViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,10 +12,10 @@ import javax.inject.Singleton
 @Component(modules = [(NetworkModule::class)])
 interface ViewModelInjector {
     /**
-     * Injects required dependencies into the specified CustomCollectionsViewModel
-     * @param customCollectionsViewModel VM in which to inject the dependencies
+     * Injects required dependencies into the specified CustomCollectionsListViewModel
+     * @param customCollectionsListViewModel VM in which to inject the dependencies
      */
-    fun inject(customCollectionsViewModel: CustomCollectionsViewModel)
+    fun inject(customCollectionsListViewModel: CustomCollectionsListViewModel)
 
     @Component.Builder
     interface Builder {
