@@ -2,6 +2,7 @@ package com.rickydam.shopifyandroidappsummer2019.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
+import com.rickydam.shopifyandroidappsummer2019.R
 import com.rickydam.shopifyandroidappsummer2019.data.remote.ShopifyAPI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -15,6 +16,9 @@ class CustomCollectionsViewModel : BaseViewModel() {
     private lateinit var subscription: Disposable
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+
+    val errorMessage: MutableLiveData<Int> = MutableLiveData()
+    val errorClickListener = View.OnClickListener { loadCustomCollections() }
 
     init {
         loadCustomCollections()
@@ -34,6 +38,7 @@ class CustomCollectionsViewModel : BaseViewModel() {
 
     private fun onRetrieveCustomCollectionsStart() {
         loadingVisibility.value = View.VISIBLE
+        errorMessage.value = null
     }
 
     private fun onRetrieveCustomCollectionsFinish() {
@@ -42,7 +47,9 @@ class CustomCollectionsViewModel : BaseViewModel() {
 
     private fun onRetrieveCustomCollectionsSuccess() {}
 
-    private fun onRetrieveCustomCollectionsError() {}
+    private fun onRetrieveCustomCollectionsError() {
+        errorMessage.value = R.string.custom_collections_error
+    }
 
     override fun onCleared() {
         super.onCleared()
