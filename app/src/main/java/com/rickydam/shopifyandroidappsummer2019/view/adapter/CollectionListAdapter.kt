@@ -10,30 +10,32 @@ import com.rickydam.shopifyandroidappsummer2019.model.Collection
 import com.rickydam.shopifyandroidappsummer2019.viewmodel.CollectionViewModel
 
 class CollectionListAdapter: RecyclerView.Adapter<CollectionListAdapter.ViewHolder>() {
+
     private lateinit var collectionList: List<Collection>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionListAdapter.ViewHolder {
-        val binding: ItemCollectionBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_collection, parent, false)
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
+        val binding: ItemCollectionBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(p0.context), R.layout.item_collection, p0, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CollectionListAdapter.ViewHolder, position: Int) {
-        holder.bind(collectionList[position])
+    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
+        p0.bind(collectionList[p1])
     }
 
     override fun getItemCount(): Int {
         return if(::collectionList.isInitialized) collectionList.size else 0
     }
 
-    fun updateCollectionList(collectionList: List<Collection>){
+    fun updateCollectionList(collectionList: List<Collection>) {
         this.collectionList = collectionList
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: ItemCollectionBinding):RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ItemCollectionBinding): RecyclerView.ViewHolder(binding.root) {
         private val collectionViewModel = CollectionViewModel()
 
-        fun bind(collection: Collection){
+        fun bind(collection: Collection) {
             collectionViewModel.bind(collection)
             binding.collectionViewModel = collectionViewModel
         }
